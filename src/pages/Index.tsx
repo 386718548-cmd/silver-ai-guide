@@ -105,11 +105,11 @@ const Index = () => {
             >
               <div
                 className="feature-icon"
-                style={{ backgroundColor: `hsl(${f.color} / 0.15)` }}
+                style={{ backgroundColor: `hsl(var(${f.colorVar}) / 0.15)` }}
               >
                 <f.icon
                   className="w-9 h-9 md:w-10 md:h-10"
-                  style={{ color: `hsl(${f.color})` }}
+                  style={{ color: `hsl(var(${f.colorVar}))` }}
                 />
               </div>
               <div>
