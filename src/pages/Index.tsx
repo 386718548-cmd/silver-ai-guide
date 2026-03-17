@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Pill, Mic, Heart, BookOpen, Palette, Camera, Phone, HelpCircle } from "lucide-react";
 import AIChatDialog from "@/components/AIChatDialog";
 import MedicationHelper from "@/components/MedicationHelper";
+import HealthReminder from "@/components/HealthReminder";
 import HelpGuide from "@/components/HelpGuide";
 
 const features = [
