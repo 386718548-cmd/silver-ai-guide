@@ -138,6 +138,9 @@ const Index = () => {
       {activeFeature === "medication" && (
         <MedicationHelper onClose={() => setActiveFeature(null)} />
       )}
+      {activeFeature === "health" && (
+        <HealthReminder onClose={() => setActiveFeature(null)} />
+      )}
       {showHelp && <HelpGuide onClose={() => setShowHelp(false)} />}
     </div>
   );
