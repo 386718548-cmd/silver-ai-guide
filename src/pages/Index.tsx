@@ -49,6 +49,13 @@ const features = [
     desc: "整理照片，讲述您的故事",
     colorVar: "--feature-album",
   },
+  {
+    id: "family",
+    icon: Users,
+    label: "家人关怀",
+    desc: "子女远程协助，守护健康",
+    colorVar: "--feature-voice",
+  },
 ];
 
 const Index = () => {
