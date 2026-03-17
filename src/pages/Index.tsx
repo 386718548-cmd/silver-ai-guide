@@ -2,14 +2,7 @@ import { useState } from "react";
 import { Pill, Mic, Heart, BookOpen, Palette, Camera, Phone, HelpCircle } from "lucide-react";
 import AIChatDialog from "@/components/AIChatDialog";
 import MedicationHelper from "@/components/MedicationHelper";
-import HealthReminder from "@/components/HealthReminder";
-import ReadingMagnifier from "@/components/ReadingMagnifier";
-import InterestLearning from "@/components/InterestLearning";
-import MemoryAlbum from "@/components/MemoryAlbum";
 import HelpGuide from "@/components/HelpGuide";
-import BottomNav from "@/components/BottomNav";
-import ProfilePage from "@/components/ProfilePage";
-import SettingsPage from "@/components/SettingsPage";
 
 const features = [
   {
@@ -59,19 +52,9 @@ const features = [
 const Index = () => {
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
   const [showHelp, setShowHelp] = useState(false);
-  const [tab, setTab] = useState<"home" | "profile" | "settings">("home");
-
-  const featureDialogs: Record<string, JSX.Element> = {
-    voice: <AIChatDialog onClose={() => setActiveFeature(null)} />,
-    medication: <MedicationHelper onClose={() => setActiveFeature(null)} />,
-    health: <HealthReminder onClose={() => setActiveFeature(null)} />,
-    reading: <ReadingMagnifier onClose={() => setActiveFeature(null)} />,
-    learning: <InterestLearning onClose={() => setActiveFeature(null)} />,
-    album: <MemoryAlbum onClose={() => setActiveFeature(null)} />,
-  };
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-8">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border px-4 py-4">
         <div className="max-w-lg mx-auto flex items-center justify-between">
@@ -99,75 +82,61 @@ const Index = () => {
         </div>
       </header>
 
-      <div className="max-w-lg mx-auto px-4">
-        {tab === "home" && (
-          <>
-            {/* Main voice button */}
-            <div className="mt-8 mb-8 fade-in">
-              <button
-                onClick={() => setActiveFeature("voice")}
-                className="w-full elder-button bg-primary text-primary-foreground flex items-center justify-center gap-4 voice-pulse"
-              >
-                <Mic className="w-8 h-8" />
-                <span>按这里，对我说话</span>
-              </button>
-            </div>
-
-            {/* Feature grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {features.map((f, i) => (
-                <button
-                  key={f.id}
-                  onClick={() => setActiveFeature(f.id)}
-                  className="feature-card bg-card text-card-foreground fade-in"
-                  style={{ animationDelay: `${i * 80}ms` }}
-                >
-                  <div
-                    className="feature-icon"
-                    style={{ backgroundColor: `hsl(var(${f.colorVar}) / 0.15)` }}
-                  >
-                    <f.icon
-                      className="w-9 h-9 md:w-10 md:h-10"
-                      style={{ color: `hsl(var(${f.colorVar}))` }}
-                    />
-                  </div>
-                  <div>
-                    <p className="feature-label">{f.label}</p>
-                    <p className="text-base text-muted-foreground mt-1">{f.desc}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            {/* Bottom tip */}
-            <div className="mt-8">
-              <div className="rounded-2xl bg-accent p-5 text-center">
-                <p className="text-lg text-accent-foreground font-medium">
-                  💡 有问题？直接对着手机说话，或者点击上方按钮
-                </p>
-              </div>
-            </div>
-          </>
-        )}
-
-        {tab === "profile" && (
-          <div className="mt-6 fade-in">
-            <ProfilePage />
-          </div>
-        )}
-
-        {tab === "settings" && (
-          <div className="mt-6 fade-in">
-            <SettingsPage />
-          </div>
-        )}
+      {/* Main voice button */}
+      <div className="max-w-lg mx-auto px-4 mt-8 mb-8 fade-in">
+        <button
+          onClick={() => setActiveFeature("voice")}
+          className="w-full elder-button bg-primary text-primary-foreground flex items-center justify-center gap-4 voice-pulse"
+        >
+          <Mic className="w-8 h-8" />
+          <span>按这里，对我说话</span>
+        </button>
       </div>
 
-      {/* Bottom navigation */}
-      <BottomNav active={tab} onNavigate={setTab} />
+      {/* Feature grid */}
+      <div className="max-w-lg mx-auto px-4">
+        <div className="grid grid-cols-2 gap-4">
+          {features.map((f, i) => (
+            <button
+              key={f.id}
+              onClick={() => setActiveFeature(f.id)}
+              className="feature-card bg-card text-card-foreground fade-in"
+              style={{ animationDelay: `${i * 80}ms` }}
+            >
+              <div
+                className="feature-icon"
+                style={{ backgroundColor: `hsl(var(${f.colorVar}) / 0.15)` }}
+              >
+                <f.icon
+                  className="w-9 h-9 md:w-10 md:h-10"
+                  style={{ color: `hsl(var(${f.colorVar}))` }}
+                />
+              </div>
+              <div>
+                <p className="feature-label">{f.label}</p>
+                <p className="text-base text-muted-foreground mt-1">{f.desc}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
 
-      {/* Feature dialogs */}
-      {activeFeature && featureDialogs[activeFeature]}
+      {/* Bottom bar */}
+      <div className="max-w-lg mx-auto px-4 mt-8">
+        <div className="rounded-2xl bg-accent p-5 text-center">
+          <p className="text-lg text-accent-foreground font-medium">
+            💡 有问题？直接对着手机说话，或者点击上方按钮
+          </p>
+        </div>
+      </div>
+
+      {/* Dialogs */}
+      {activeFeature === "voice" && (
+        <AIChatDialog onClose={() => setActiveFeature(null)} />
+      )}
+      {activeFeature === "medication" && (
+        <MedicationHelper onClose={() => setActiveFeature(null)} />
+      )}
       {showHelp && <HelpGuide onClose={() => setShowHelp(false)} />}
     </div>
   );
