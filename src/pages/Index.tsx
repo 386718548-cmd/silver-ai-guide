@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Pill, Mic, Heart, BookOpen, Palette, Camera, Phone, HelpCircle } from "lucide-react";
 import AIChatDialog from "@/components/AIChatDialog";
 import MedicationHelper from "@/components/MedicationHelper";
+import HealthReminder from "@/components/HealthReminder";
 import HelpGuide from "@/components/HelpGuide";
 
 const features = [
@@ -136,6 +137,9 @@ const Index = () => {
       )}
       {activeFeature === "medication" && (
         <MedicationHelper onClose={() => setActiveFeature(null)} />
+      )}
+      {activeFeature === "health" && (
+        <HealthReminder onClose={() => setActiveFeature(null)} />
       )}
       {showHelp && <HelpGuide onClose={() => setShowHelp(false)} />}
     </div>
