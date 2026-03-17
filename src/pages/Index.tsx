@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Pill, Mic, Heart, BookOpen, Palette, Camera, Phone, HelpCircle } from "lucide-react";
+import { Pill, Mic, Heart, BookOpen, Palette, Camera, Phone, HelpCircle, Users } from "lucide-react";
 import AIChatDialog from "@/components/AIChatDialog";
 import MedicationHelper from "@/components/MedicationHelper";
 import HealthReminder from "@/components/HealthReminder";
+import FamilyAssist from "@/components/FamilyAssist";
 import HelpGuide from "@/components/HelpGuide";
 
 const features = [
@@ -47,6 +48,13 @@ const features = [
     label: "记忆相册",
     desc: "整理照片，讲述您的故事",
     colorVar: "--feature-album",
+  },
+  {
+    id: "family",
+    icon: Users,
+    label: "家人关怀",
+    desc: "子女远程协助，守护健康",
+    colorVar: "--feature-voice",
   },
 ];
 
@@ -140,6 +148,9 @@ const Index = () => {
       )}
       {activeFeature === "health" && (
         <HealthReminder onClose={() => setActiveFeature(null)} />
+      )}
+      {activeFeature === "family" && (
+        <FamilyAssist onClose={() => setActiveFeature(null)} />
       )}
       {showHelp && <HelpGuide onClose={() => setShowHelp(false)} />}
     </div>
