@@ -25,3 +25,4 @@ dist-ssr
 
 # 环境变量（含 API 密钥，不提交到 Git）
 .env.local
+.env
