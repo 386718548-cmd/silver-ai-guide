@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Mic, Send, Volume2 } from "lucide-react";
+import { X, Mic, Send, Volume2, MicOff } from "lucide-react";
+import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
+import { useDialect } from "@/contexts/DialectContext";
 
 interface Message {
   role: "user" | "assistant";
@@ -13,6 +15,9 @@ const quickQuestions = [
   "给孙子讲个故事",
 ];
 
+// 支持语音识别的方言
+const STT_SUPPORTED_DIALECTS = ['mandarin', 'cantonese'];
+
 export default function AIChatDialog({ onClose }: { onClose: () => void }) {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -21,12 +26,38 @@ export default function AIChatDialog({ onClose }: { onClose: () => void }) {
     },
   ]);
   const [input, setInput] = useState("");
-  const [isListening, setIsListening] = useState(false);
   const messagesEnd = useRef<HTMLDivElement>(null);
+  const { currentDialectConfig } = useDialect();
+
+  const {
+    status,
+    transcript,
+    error,
+    isSupported,
+    startListening,
+    stopListening,
+  } = useSpeechRecognition();
+
+  const isListening = status === "listening" || status === "processing";
+  const isSttSupportedForDialect = STT_SUPPORTED_DIALECTS.includes(currentDialectConfig.id);
 
   useEffect(() => {
     messagesEnd.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // 当识别完成时，自动发送消息
+  useEffect(() => {
+    if (transcript && status === "idle" && !error) {
+      sendMessage(transcript);
+    }
+  }, [transcript, status, error]);
+
+  // 当有错误时显示
+  useEffect(() => {
+    if (error) {
+      console.error("语音识别错误:", error);
+    }
+  }, [error]);
 
   const sendMessage = (text: string) => {
     if (!text.trim()) return;
@@ -47,15 +78,32 @@ export default function AIChatDialog({ onClose }: { onClose: () => void }) {
   };
 
   const toggleListening = () => {
-    setIsListening(!isListening);
-    if (!isListening) {
-      // Simulate voice input
-      setTimeout(() => {
-        setIsListening(false);
-        sendMessage("帮我查一下高血压要注意什么");
-      }, 2500);
+    if (isListening) {
+      stopListening();
+    } else {
+      if (!isSupported) {
+        alert("当前浏览器不支持语音识别，请使用打字输入");
+        return;
+      }
+      startListening();
     }
   };
+
+  // 获取提示文字
+  const getHintText = () => {
+    if (isListening) {
+      if (!isSttSupportedForDialect) {
+        return `🎙️ 正在聆听... 请用普通话说（${currentDialectConfig.name}语音识别暂不支持）`;
+      }
+      return `🎙️ 正在聆听，请说${currentDialectConfig.name}...`;
+    }
+    if (error) {
+      return error;
+    }
+    return null;
+  };
+
+  const hintText = getHintText();
 
   return (
     <div className="fixed inset-0 z-50 bg-background flex flex-col fade-in">
@@ -117,29 +165,35 @@ export default function AIChatDialog({ onClose }: { onClose: () => void }) {
             onClick={toggleListening}
             className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 active:scale-95 transition-all ${
               isListening
-                ? "bg-destructive text-destructive-foreground voice-pulse"
-                : "bg-secondary text-secondary-foreground"
+                ? "bg-gradient-to-r from-orange-500 to-rose-500 text-white voice-pulse"
+                : "bg-gradient-to-r from-teal-500 to-emerald-500 text-white"
             }`}
           >
-            <Mic className="w-8 h-8" />
+            {isListening ? (
+              <MicOff className="w-8 h-8" />
+            ) : (
+              <Mic className="w-8 h-8" />
+            )}
           </button>
           <input
-            value={input}
+            value={isListening ? transcript : input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage(input)}
-            placeholder="打字输入..."
-            className="flex-1 h-16 px-5 rounded-2xl bg-card border border-border text-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            placeholder={isListening ? "正在识别中..." : "打字输入..."}
+            disabled={isListening}
+            className="flex-1 h-16 px-5 rounded-2xl bg-card border border-border text-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
           />
           <button
             onClick={() => sendMessage(input)}
-            className="w-16 h-16 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shrink-0 active:scale-95"
+            disabled={isListening || !input.trim()}
+            className="w-16 h-16 rounded-2xl bg-gradient-to-r from-orange-500 to-rose-500 text-white flex items-center justify-center shrink-0 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send className="w-7 h-7" />
           </button>
         </div>
-        {isListening && (
-          <p className="text-center text-xl text-destructive font-bold mt-3 animate-pulse">
-            🎙️ 正在聆听，请说话...
+        {hintText && (
+          <p className={`text-center text-base font-medium mt-2 ${isListening ? 'text-orange-600 animate-pulse' : 'text-rose-600'}`}>
+            {hintText}
           </p>
         )}
       </div>

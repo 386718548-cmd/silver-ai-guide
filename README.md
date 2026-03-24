@@ -1,73 +1,65 @@
-# Welcome to your Lovable project
+# 🌟 银发 AI 指南 | Silver AI Guide
 
-## Project info
+> 🎁 专为中老年朋友设计，让每一位长者都能轻松、安全地享受人工智能带来的便利。
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-1.0.0-blue)
+![适合人群](https://img.shields.io/badge/%E9%80%82%E5%90%88-55%E5%B2%81%2B%E9%95%BF%E8%BE%88-green)
+![许可](https://img.shields.io/badge/%E8%AE%B8%E5%8F%AF-MIT-brightgreen)
 
-## How can I edit this code?
+## 📖 项目简介
 
-There are several ways of editing your application.
+“银发 AI 指南”是一个面向长辈的 **零门槛 AI 教程**：用更大的字、更清晰的对比度、更生活化的语言，把 AI 讲明白、教会用、提醒防诈骗。
 
-**Use Lovable**
+## 🚀 在线访问（推荐长辈）
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+打开链接即可使用（无需安装）：
 
-Changes made via Lovable will be committed automatically to this repo.
+- `https://386718548-cmd.github.io/silver-ai-guide/`
 
-**Use your preferred IDE**
+## 🧑‍💻 本地运行（开发者）
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+默认访问：
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- `http://localhost:8080/silver-ai-guide/`
 
-**Use GitHub Codespaces**
+## 🎨 适老化设计要点
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **大字体**：基础字号提升到 20px，标题更大
+- **高对比度**：纯白背景 + 深色文字，减少低对比配色
+- **大按钮**：更大的点击/触控区域，减少误触
 
-## What technologies are used for this project?
+## 📚 核心课程（前三课草稿）
 
-This project is built with:
+课程内容在 `src/data/lessons.ts` 统一维护，支持 HTML/Markdown 文本。
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- 第 1 课：什么是 AI？
+- 第 2 课：您的第一个 AI 助手
+- 第 3 课：微信里的 AI 功能
 
-## How can I deploy this project?
+## 🚀 部署上线（GitHub Pages）
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+本项目已配置 `gh-pages` 一键部署：
 
-## Can I connect a custom domain to my Lovable project?
+```bash
+npm run deploy
+```
 
-Yes, you can!
+部署成功后，GitHub Pages 一般会是：
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- `https://<YOUR_USERNAME>.github.io/silver-ai-guide/`
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+详细步骤见 `DEPLOYMENT_GUIDE.md`。
+
+## 📅 后续迭代计划
+
+详见 `ROADMAP.md`，包含：
+
+- Phase 2：🔊 语音朗读（Web Speech API）
+- Phase 3：🖨️ 一键打印版（PDF/打印样式）
+- Phase 4：📹 视频嵌入
+- Phase 5：👨‍👩‍👧 子女模式

@@ -1,0 +1,106 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "银龄 AI 助手",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/medication/index",
+      "style": {
+        "navigationBarTitleText": "AI 问药",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/medication/result",
+      "style": {
+        "navigationBarTitleText": "药品解析结果",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/voice/index",
+      "style": {
+        "navigationBarTitleText": "语音助手",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/reminder/index",
+      "style": {
+        "navigationBarTitleText": "健康提醒",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/reminder/create",
+      "style": {
+        "navigationBarTitleText": "新建提醒",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/reminder/detail",
+      "style": {
+        "navigationBarTitleText": "提醒详情",
+        "navigationBarBackgroundColor": "#4CAF50",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/companion/index",
+      "style": {
+        "navigationBarTitleText": "AI 陪伴",
+        "navigationBarBackgroundColor": "#5D4037",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/sos/index",
+      "style": {
+        "navigationBarTitleText": "紧急救助",
+        "navigationBarBackgroundColor": "#C0392B",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/sos/history",
+      "style": {
+        "navigationBarTitleText": "求救记录",
+        "navigationBarBackgroundColor": "#C0392B",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/settings/contacts",
+      "style": {
+        "navigationBarTitleText": "紧急联系人",
+        "navigationBarBackgroundColor": "#5D4037",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/settings/theme",
+      "style": {
+        "navigationBarTitleText": "界面风格",
+        "navigationBarBackgroundColor": "#5D4037",
+        "navigationBarTextStyle": "white"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "银龄 AI 助手",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "backgroundColor": "#f5f5f5"
+  }
+}

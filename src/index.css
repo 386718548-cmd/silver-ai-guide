@@ -2,141 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+:root {
+  /* 🎨 适老化色彩变量 */
+  --font-base: 20px; /* 基础字号加大 */
+  --font-large: 28px; /* 标题字号 */
+  --color-bg: #ffffff; /* 纯白背景 */
+  --color-text: #1a1a1a; /* 深色文字 */
+  --color-primary: #0f4c81; /* 深蓝：按钮/强调 */
+  --color-primary-contrast: #ffffff;
+  --color-muted: #f3f4f6; /* 浅灰底 */
+  --color-border: #d1d5db;
+  --radius: 16px;
 
-@layer base {
-  :root {
-    --background: 30 50% 98%;
-    --foreground: 20 20% 15%;
+  /* shadcn/ui 兼容变量 - 供组件使用 */
+  --background: 30 50% 98%;
+  --foreground: 20 20% 15%;
+  --card: 30 40% 96%;
+  --card-foreground: 20 20% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 20% 15%;
+  --primary: 24 85% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 160 45% 45%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 30 20% 92%;
+  --muted-foreground: 20 10% 45%;
+  --accent: 24 60% 92%;
+  --accent-foreground: 24 85% 35%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 30 20% 88%;
+  --input: 30 20% 88%;
+  --ring: 24 85% 55%;
 
-    --card: 30 40% 96%;
-    --card-foreground: 20 20% 15%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 20% 15%;
-
-    --primary: 24 85% 55%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 160 45% 45%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 30 20% 92%;
-    --muted-foreground: 20 10% 45%;
-
-    --accent: 24 60% 92%;
-    --accent-foreground: 24 85% 35%;
-
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 30 20% 88%;
-    --input: 30 20% 88%;
-    --ring: 24 85% 55%;
-
-    --radius: 1rem;
-
-    /* Custom tokens */
-    --feature-medication: 24 85% 55%;
-    --feature-voice: 160 45% 45%;
-    --feature-health: 210 65% 50%;
-    --feature-reading: 280 50% 55%;
-    --feature-learning: 340 60% 55%;
-    --feature-album: 45 75% 50%;
-
-    --shadow-card: 0 4px 24px -4px hsl(20 20% 15% / 0.08);
-    --shadow-button: 0 6px 20px -4px hsl(24 85% 55% / 0.35);
-
-    --font-display: 'Noto Sans SC', system-ui, sans-serif;
-    --font-body: 'Noto Sans SC', system-ui, sans-serif;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+  /* 功能模块颜色 */
+  --feature-medication: 24 85% 55%;
+  --feature-voice: 160 45% 45%;
+  --feature-health: 210 65% 50%;
+  --feature-reading: 280 50% 55%;
+  --feature-learning: 340 60% 55%;
+  --feature-album: 45 75% 50%;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--font-base);
+  line-height: 1.8;
+}
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-body);
-    font-size: 18px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
+/* 让默认文本更适合长辈阅读 */
+h1,
+h2,
+h3 {
+  font-size: var(--font-large);
+  font-weight: 800;
+  line-height: 1.2;
+}
 
-  h1, h2, h3 {
-    font-family: var(--font-display);
-    font-weight: 900;
-  }
+button,
+a {
+  min-height: 56px;
+  font-size: 22px;
 }
 
 @layer components {
-  .elder-title {
-    @apply text-4xl md:text-5xl font-black tracking-tight;
-    color: hsl(var(--foreground));
+  .elder-card {
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    background: white;
+    padding: 20px;
   }
 
-  .elder-subtitle {
-    @apply text-xl md:text-2xl font-medium;
-    color: hsl(var(--muted-foreground));
-  }
-
-  .elder-body {
-    @apply text-lg md:text-xl leading-relaxed;
-  }
-
-  .feature-card {
-    @apply rounded-2xl p-6 md:p-8 flex flex-col items-center gap-4 cursor-pointer
-           transition-all duration-300 active:scale-95;
-    box-shadow: var(--shadow-card);
-    min-height: 180px;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px -4px hsl(20 20% 15% / 0.12);
-  }
-
-  .feature-icon {
-    @apply w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center text-3xl md:text-4xl;
-  }
-
-  .feature-label {
-    @apply text-xl md:text-2xl font-bold text-center;
-  }
-
-  .elder-button {
-    @apply px-8 py-5 rounded-2xl text-xl md:text-2xl font-bold
-           transition-all duration-200 active:scale-95;
-    box-shadow: var(--shadow-button);
-  }
-
-  .voice-pulse {
-    animation: pulse-ring 2s ease-out infinite;
-  }
-
-  @keyframes pulse-ring {
-    0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
-    70% { box-shadow: 0 0 0 20px hsl(var(--primary) / 0); }
-    100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0); }
-  }
-
-  .fade-in {
-    animation: fadeIn 0.5s ease-out;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
+  .elder-btn {
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-weight: 800;
   }
 }
